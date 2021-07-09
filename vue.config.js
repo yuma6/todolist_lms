@@ -2,6 +2,6 @@ module.exports = {
   transpileDependencies: [
     'vuetify'
   ],
-  publicPath: '/project-name/',
+  publicPath: '/todolist_lms/',
   outputDir: 'docs'
 } 
