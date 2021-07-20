@@ -1,4 +1,4 @@
-<template>
+<template><!--上手くいかなかった-->
   <div id = "todoapp">
     <!-- 絞り込みラジオボタン -->
     <label v-for="(label,key) in options" :key="key">
@@ -66,7 +66,7 @@
 </template>
 
 <script>
-
+import Vue from 'vue'
   var STORAGE_KEY = 'todos-vuejs-demo'
   var todoStorage = {
     fetch: function() {
@@ -82,27 +82,59 @@
     save: function(todos) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
     }
-  },
+  }
 
-  var todoapp = new Vue ({
+  new Vue ({
     el: '#todoapp',
     data: {
       // 使用するデータ
       todos:[],
+      // 初期値を「-1」つまり「すべて」にする
+      current: -1,
       options: [
         { value: -1, label: 'すべて' },
         { value: 0,  label: '作業中' },
         { value: 1,  label: '完了' }
-      ],
+      ]
       // 選択している options の value を記憶するためのデータ
-      // 初期値を「-1」つまり「すべて」にする
-      current: -1
+
+    },
+    computed: {
+      computedTodos: function() {
+        // データ current が -1 ならすべて
+        // それ以外なら current と state が一致するものだけに絞り込む
+        return this.todos.filter(function(el) {
+          return this.current < 0 ? true : this.current === el.state
+        }, this)
+      },
+      labels() {
+        return this.options.reduce(function(a, b) {
+          return Object.assign(a, { [b.value]: b.label })
+        }, {})
+        // キーから見つけやすいように、次のように加工したデータを作成
+        // {0: '作業中', 1: '完了', -1: 'すべて'}
+      }
+    },
+    watch: {
+    // オプションを使う場合はオブジェクト形式にする
+      todos: {
+        // 引数はウォッチしているプロパティの変更後の値
+        handler: function(todos) {
+          todoStorage.save(todos)
+        },
+        // deep オプションでネストしているデータも監視できる
+        deep: true
+      }
+    },
+    created() {
+      // インスタンス作成時に自動的に fetch() する
+      this.todos = todoStorage.fetch()
     },
     
     methods: {
       // 使用するメソッド
       // ToDo 追加の処理
-      doAdd: function(event, value) {
+      doAdd: function() {
         // ref で名前を付けておいた要素を参照
         var comment = this.$refs.comment
         // 入力がなければ何もしないで return
@@ -120,17 +152,7 @@
         // フォーム要素を空にする
         comment.value = ''
       },
-      watch: {
-      // オプションを使う場合はオブジェクト形式にする
-        todos: {
-          // 引数はウォッチしているプロパティの変更後の値
-          handler: function(todos) {
-            todoStorage.save(todos)
-          },
-          // deep オプションでネストしているデータも監視できる
-          deep: true
-        }
-      },
+
       // 状態変更の処理
       doChangeState: function(item) {
         item.state = item.state ? 0 : 1
@@ -141,30 +163,7 @@
         this.todos.splice(index, 1)
       }
     },
-
-    created() {
-      // インスタンス作成時に自動的に fetch() する
-      this.todos = todoStorage.fetch()
-    },
-
-    computed: {
-      computedTodos: function() {
-        // データ current が -1 ならすべて
-        // それ以外なら current と state が一致するものだけに絞り込む
-        return this.todos.filter(function(el) {
-          return this.current < 0 ? true : this.current === el.state
-        }, this)
-      },
-      labels() {
-        return this.options.reduce(function(a, b) {
-          return Object.assign(a, { [b.value]: b.label })
-        }, {})
-        // キーから見つけやすいように、次のように加工したデータを作成
-        // {0: '作業中', 1: '完了', -1: 'すべて'}
-      }
-    }
   })
-
 
 </script>
 
