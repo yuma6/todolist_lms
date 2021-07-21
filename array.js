@@ -21,9 +21,9 @@ const object23 = {property231:'value231ob',property232:'value232ob',property233:
 const object2 = {property21:object21,property22:object22,property23:object23},//オブジェクトを値に持つオブジェクト
 
 // jsで「配列を値に持つオブジェクトの配列」を書いてください。
-const object31 = {property31:array21,property32:array22,property33:array23},//配列を値に持つオブジェクト
-const object32 = {property31:array21,property32:array22,property33:array23},
-const object33 = {property31:array21,property32:array22,property33:array23},
+const object31 = {property311:array21,property312:array22,property313:array23},//配列を値に持つオブジェクト
+const object32 = {property321:array21,property322:array22,property323:array23},
+const object33 = {property331:array21,property332:array22,property333:array23},
 const array3 = [object31,object32,object33],//配列を値に持つオブジェクトの配列
 
 // jsで「オブジェクトの配列を値に持つオブジェクト」を書いてください。
