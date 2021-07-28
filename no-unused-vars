@@ -1,0 +1,421 @@
+user18@DESKTOP-53QBUL1:~/todolist_lms$ yarn run lint
+Debugger attached.
+yarn run v1.22.10
+$ vue-cli-service lint
+Debugger attached.
+error: 'STORAGE_KEY' is not defined (no-undef) at src/TodoApp2.vue:54:49:
+  52 | todoStorage : {
+  53 |   fetch: function () {
+> 54 |     var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+     |                                                 ^
+  55 |     todos.forEach(function (todo, index) {
+  56 |       todo.id = index
+  57 |     })
+
+
+error: 'todoStorage' is not defined (no-undef) at src/TodoApp2.vue:58:5:
+  56 |       todo.id = index
+  57 |     })
+> 58 |     todoStorage.uid = todos.length
+     |     ^
+  59 |     return todos
+  60 |   },
+  61 |   save: function (todos) {
+
+
+error: 'STORAGE_KEY' is not defined (no-undef) at src/TodoApp2.vue:62:26:
+  60 |   },
+  61 |   save: function (todos) {
+> 62 |     localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+     |                          ^
+  63 |   }
+  64 | },
+  65 |
+
+
+error: 'todoStorage' is not defined (no-undef) at src/TodoApp2.vue:109:9:
+  107 |       // 引数はウォッチしているプロパティの変更後の値
+  108 |       handler: function (todos) {
+> 109 |         todoStorage.save(todos)
+      |         ^
+  110 |       },
+  111 |       // deep オプションでネストしているデータも監視できる
+  112 |       deep: true
+
+
+error: 'todoStorage' is not defined (no-undef) at src/TodoApp2.vue:119:18:
+  117 |   created() {
+  118 |     // インスタンス作成時に自動的に fetch() する
+> 119 |     this.todos = todoStorage.fetch()
+      |                  ^
+  120 |   },
+  121 |
+  122 |   methods: {
+
+
+error: 'todoStorage' is not defined (no-undef) at src/TodoApp2.vue:136:13:
+  134 |       // 作業状態「state」はデフォルト「作業中=0」で作成
+  135 |       this.todos.push({
+> 136 |         id: todoStorage.uid++,
+      |             ^
+  137 |         comment: comment.value,
+  138 |         state: 0
+  139 |       })
+
+
+error: 'Vue' is not defined (no-undef) at src/components/Todolist2.vue:20:5:
+  18 |
+  19 | // ★STEP1
+> 20 | new Vue({
+     |     ^
+  21 |   el: '#app',
+  22 |
+  23 |   data: {
+
+
+7 errors found.
+Waiting for the debugger to disconnect...
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+Waiting for the debugger to disconnect...
+
+
+
+user18@DESKTOP-53QBUL1:~/todolist_lms$ yarn run lint
+Debugger attached.
+yarn run v1.22.10
+$ vue-cli-service lint
+Debugger attached.
+error: 'STORAGE_KEY' is not defined (no-undef) at src/TodoApp2.vue:54:49:
+  52 | todoStorage : {
+  53 |   fetch: function () {
+> 54 |     var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+     |                                                 ^
+  55 |     todos.forEach(function (todo, index) {
+  56 |       todo.id = index
+  57 |     })
+
+
+error: 'todoStorage' is not defined (no-undef) at src/TodoApp2.vue:58:5:
+  56 |       todo.id = index
+  57 |     })
+> 58 |     todoStorage.uid = todos.length
+     |     ^
+  59 |     return todos
+  60 |   },
+  61 |   save: function (todos) {
+
+
+error: 'STORAGE_KEY' is not defined (no-undef) at src/TodoApp2.vue:62:26:
+  60 |   },
+  61 |   save: function (todos) {
+> 62 |     localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+     |                          ^
+  63 |   }
+  64 | },
+  65 |
+
+
+error: 'todoStorage' is not defined (no-undef) at src/TodoApp2.vue:109:9:
+  107 |       // 引数はウォッチしているプロパティの変更後の値
+  108 |       handler: function (todos) {
+> 109 |         todoStorage.save(todos)
+      |         ^
+  110 |       },
+  111 |       // deep オプションでネストしているデータも監視できる
+  112 |       deep: true
+
+
+error: 'todoStorage' is not defined (no-undef) at src/TodoApp2.vue:119:18:
+  117 |   created() {
+  118 |     // インスタンス作成時に自動的に fetch() する
+> 119 |     this.todos = todoStorage.fetch()
+      |                  ^
+  120 |   },
+  121 |
+  122 |   methods: {
+
+
+error: 'event' is defined but never used (no-unused-vars) at src/TodoApp2.vue:125:21:
+  123 |
+  124 |     // ★STEP7 ToDo 追加の処理
+> 125 |     doAdd: function(event, value) {
+      |                     ^
+  126 |       // ref で名前を付けておいた要素を参照
+  127 |       var comment = this.$refs.comment
+  128 |       // 入力がなければ何もしないで return
+
+
+error: 'value' is defined but never used (no-unused-vars) at src/TodoApp2.vue:125:28:
+  123 |
+  124 |     // ★STEP7 ToDo 追加の処理
+> 125 |     doAdd: function(event, value) {
+      |                            ^
+  126 |       // ref で名前を付けておいた要素を参照
+  127 |       var comment = this.$refs.comment
+  128 |       // 入力がなければ何もしないで return
+
+
+error: 'todoStorage' is not defined (no-undef) at src/TodoApp2.vue:136:13:
+  134 |       // 作業状態「state」はデフォルト「作業中=0」で作成
+  135 |       this.todos.push({
+> 136 |         id: todoStorage.uid++,
+      |             ^
+  137 |         comment: comment.value,
+  138 |         state: 0
+  139 |       })
+
+
+error: 'Vue' is not defined (no-undef) at src/components/Todolist2.vue:20:5:
+  18 |
+  19 | // ★STEP1
+> 20 | new Vue({
+     |     ^
+  21 |   el: '#app',
+  22 |
+  23 |   data: {
+
+
+error: 'event' is defined but never used (no-unused-vars) at src/components/Todolist2.vue:77:21:
+  75 |
+  76 |     // ★STEP7 ToDo 追加の処理
+> 77 |     doAdd: function(event, value) {
+     |                     ^
+  78 |       // ref で名前を付けておいた要素を参照
+  79 |       var comment = this.$refs.comment
+  80 |       // 入力がなければ何もしないで return
+
+
+error: 'value' is defined but never used (no-unused-vars) at src/components/Todolist2.vue:77:28:
+  75 |
+  76 |     // ★STEP7 ToDo 追加の処理
+> 77 |     doAdd: function(event, value) {
+     |                            ^
+  78 |       // ref で名前を付けておいた要素を参照
+  79 |       var comment = this.$refs.comment
+  80 |       // 入力がなければ何もしないで return
+
+
+error: 'array1' is assigned a value but never used (no-unused-vars) at array.js:3:7:
+  1 | // jsで配列リテラルはどのように記述するでしょうか。また、オブジェクトリテラルはどのように記述するでしょうか。
+  2 | //配列
+> 3 | const array1 = ['value11','value12','value13'];
+    |       ^
+  4 | //オブジェクト
+  5 | const object1 = {
+  6 |     property11:'value11ob',
+
+
+error: 'object1' is assigned a value but never used (no-unused-vars) at array.js:5:7:
+  3 | const array1 = ['value11','value12','value13'];
+  4 | //オブジェクト
+> 5 | const object1 = {
+    |       ^
+  6 |     property11:'value11ob',
+  7 |     property12:'value12ob',
+  8 |     property13:'value13ob'
+
+
+error: 'array2a' is assigned a value but never used (no-unused-vars) at array.js:15:7:
+  13 | const array22 = ['aaa','bbb','ccc'];
+  14 | const array23 = ['123','456','789'];
+> 15 | const array2a = [array21,array22,array23];//配列の配列
+     |       ^
+  16 | const array2b = [//配列の配列 リテラル
+  17 |     ['111','222','333'],
+  18 |     ['aaa','bbb','ccc'],
+
+
+error: 'array2b' is assigned a value but never used (no-unused-vars) at array.js:16:7:
+  14 | const array23 = ['123','456','789'];
+  15 | const array2a = [array21,array22,array23];//配列の配列
+> 16 | const array2b = [//配列の配列 リテラル
+     |       ^
+  17 |     ['111','222','333'],
+  18 |     ['aaa','bbb','ccc'],
+  19 |     ['123','456','789']
+
+
+error: 'object2a' is assigned a value but never used (no-unused-vars) at array.js:26:7:
+  24 | const object22 = {property221:'value221ob',property222:'value222ob',property223:'value223ob'};
+  25 | const object23 = {property231:'value231ob',property232:'value232ob',property233:'value233ob'};
+> 26 | const object2a = {property21:object21,property22:object22,property23:object23};//オブジェクトを値に持つオブジェクト
+     |       ^
+  27 | const object2b = {//オブジェクトを値に持つオブジェクト リテラル
+  28 |     property21:{property211:'value211ob',property212:'value212ob',property213:'value213ob'},
+  29 |     property22:{property221:'value221ob',property222:'value222ob',property223:'value223ob'},
+
+
+error: 'object2b' is assigned a value but never used (no-unused-vars) at array.js:27:7:
+  25 | const object23 = {property231:'value231ob',property232:'value232ob',property233:'value233ob'};
+  26 | const object2a = {property21:object21,property22:object22,property23:object23};//オブジェクトを値に持つオブジェクト
+> 27 | const object2b = {//オブジェクトを値に持つオブジェクト リテラル
+     |       ^
+  28 |     property21:{property211:'value211ob',property212:'value212ob',property213:'value213ob'},
+  29 |     property22:{property221:'value221ob',property222:'value222ob',property223:'value223ob'},
+  30 |     property23:{property231:'value231ob',property232:'value232ob',property233:'value233ob'}
+
+
+error: 'array3a' is assigned a value but never used (no-unused-vars) at array.js:37:7:
+  35 | const object32 = {property321:array21,property322:array22,property323:array23};
+  36 | const object33 = {property331:array21,property332:array22,property333:array23};
+> 37 | const array3a = [object31,object32,object33];//配列を値に持つオブジェクトの配列
+     |       ^
+  38 |
+  39 | const array3b = [//配列を値に持つオブジェクトの配列 リテラル
+  40 |     {//配列を値に持つオブジェクト
+
+
+error: 'array3b' is assigned a value but never used (no-unused-vars) at array.js:39:7:
+  37 | const array3a = [object31,object32,object33];//配列を値に持つオブジェクトの配列
+  38 |
+> 39 | const array3b = [//配列を値に持つオブジェクトの配列 リテラル
+     |       ^
+  40 |     {//配列を値に持つオブジェクト
+  41 |         property311:['111','222','333'],
+  42 |         property312:['aaa','bbb','ccc'],
+
+
+error: 'object4a' is assigned a value but never used (no-unused-vars) at array.js:60:7:
+  58 | const array42 = [object21,object22,object23];
+  59 | const array43 = [object21,object22,object23];
+> 60 | const object4a ={property41:array41,property42:array42,property43:array43};//オブジェクトの配列を値に持つオブジェクト
+     |       ^
+  61 |
+  62 | const object4b ={//オブジェクトの配列を値に持つオブジェクト リテラル
+  63 |     property41:[{//オブジェクトの配列
+
+
+error: 'object4b' is assigned a value but never used (no-unused-vars) at array.js:62:7:
+  60 | const object4a ={property41:array41,property42:array42,property43:array43};//オブジェクトの配列を値に持つオブジェクト
+  61 |
+> 62 | const object4b ={//オブジェクトの配列を値に持つオブジェクト リテラル
+     |       ^
+  63 |     property41:[{//オブジェクトの配列
+  64 |         property211:'value211ob',
+  65 |         property212:'value212ob',
+
+
+21 errors found.
+Waiting for the debugger to disconnect...
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+Waiting for the debugger to disconnect...
+
+
+
+user18@DESKTOP-53QBUL1:~/todolist_lms$ yarn run lint
+Debugger attached.
+yarn run v1.22.10
+$ vue-cli-service lint
+Debugger attached.
+error: 'STORAGE_KEY' is not defined (no-undef) at src/TodoApp2.vue:54:49:
+  52 | todoStorage : {
+  53 |   fetch: function () {
+> 54 |     var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+     |                                                 ^
+  55 |     todos.forEach(function (todo, index) {
+  56 |       todo.id = index
+  57 |     })
+
+
+error: 'todoStorage' is not defined (no-undef) at src/TodoApp2.vue:58:5:
+  56 |       todo.id = index
+  57 |     })
+> 58 |     todoStorage.uid = todos.length
+     |     ^
+  59 |     return todos
+  60 |   },
+  61 |   save: function (todos) {
+
+
+error: 'STORAGE_KEY' is not defined (no-undef) at src/TodoApp2.vue:62:26:
+  60 |   },
+  61 |   save: function (todos) {
+> 62 |     localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+     |                          ^
+  63 |   }
+  64 | },
+  65 |
+
+
+error: 'todoStorage' is not defined (no-undef) at src/TodoApp2.vue:109:9:
+  107 |       // 引数はウォッチしているプロパティの変更後の値
+  108 |       handler: function (todos) {
+> 109 |         todoStorage.save(todos)
+      |         ^
+  110 |       },
+  111 |       // deep オプションでネストしているデータも監視できる
+  112 |       deep: true
+
+
+error: 'todoStorage' is not defined (no-undef) at src/TodoApp2.vue:119:18:
+  117 |   created() {
+  118 |     // インスタンス作成時に自動的に fetch() する
+> 119 |     this.todos = todoStorage.fetch()
+      |                  ^
+  120 |   },
+  121 |
+  122 |   methods: {
+
+
+error: 'todoStorage' is not defined (no-undef) at src/TodoApp2.vue:136:13:
+  134 |       // 作業状態「state」はデフォルト「作業中=0」で作成
+  135 |       this.todos.push({
+> 136 |         id: todoStorage.uid++,
+      |             ^
+  137 |         comment: comment.value,
+  138 |         state: 0
+  139 |       })
+
+
+error: 'Vue' is not defined (no-undef) at src/components/Todolist2.vue:20:5:
+  18 |
+  19 | // ★STEP1
+> 20 | new Vue({
+     |     ^
+  21 |   el: '#app',
+  22 |
+  23 |   data: {
+
+
+7 errors found.
+Waiting for the debugger to disconnect...
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+Waiting for the debugger to disconnect...
+
+
+
+user18@DESKTOP-53QBUL1:~/todolist_lms$ yarn run lint
+Debugger attached.
+yarn run v1.22.10
+$ vue-cli-service lint
+Debugger attached.
+error: 'Vue' is not defined (no-undef) at src/components/Todolist2.vue:20:5:
+  18 |
+  19 | // ★STEP1
+> 20 | new Vue({
+     |     ^
+  21 |   el: '#app',
+  22 |
+  23 |   data: {
+
+
+1 error found.
+Waiting for the debugger to disconnect...
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+Waiting for the debugger to disconnect...
+
+
+
+user18@DESKTOP-53QBUL1:~/todolist_lms$ yarn run lint
+Debugger attached.
+yarn run v1.22.10
+$ vue-cli-service lint
+Debugger attached.
+ DONE  No lint errors found!
+Waiting for the debugger to disconnect...
+Done in 1.35s.
+Waiting for the debugger to disconnect...
