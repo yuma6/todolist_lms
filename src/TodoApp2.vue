@@ -15,7 +15,6 @@
           <th class="button">-</th>
         </tr>
       </thead>
-
       <tbody>
           <tr
             v-for="item in computedTodos"
@@ -46,10 +45,10 @@
 </template>
 
 <script>
-export default {
+/* eslint no-unused-vars: 0 */
 // https://jp.vuejs.org/v2/examples/todomvc.html
-STORAGE_KEY : 'todos-vuejs-demo',
-todoStorage : {
+var STORAGE_KEY = 'todos-vuejs-demo'
+var todoStorage = {
   fetch: function () {
     var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
     todos.forEach(function (todo, index) {
@@ -61,24 +60,24 @@ todoStorage : {
   save: function (todos) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
   }
-},
+}
 
-
+export default {
 // ★STEP1
-  el: '#app',
-
-  data: {
+  data: function() {
+return {
     // ★STEP5 localStorage から 取得した ToDo のリスト
-    todos:function(){[]},
+    todos:[],
     // ★STEP11 抽出しているToDoの状態
-    current:function(){-1},
+    current:-1,
     // ★STEP11＆STEP13 各状態のラベル
-    options:function(){[
+    options:[
       { value: -1, label: 'すべて' },
       { value: 0, label: '作業中' },
       { value: 1, label: '完了' }
-    ]}
-  },
+    ]
+  };
+},
 
   computed: {
 
