@@ -33,7 +33,7 @@
             <!-- <td class="button"> -->
             <td class="button">
               <!-- <button v-on:click.ctrl="doRemove(item)"> -->
-              <button v-on:click="show = !show">
+              <button v-on:click="show = !show" >
                 削除
               </button>
             </td>
@@ -42,7 +42,7 @@
       </tbody>
     </table>
   <transition name="fade">
-    <p id="action" v-if="show">※削除ボタンはコントロールキーを押しながらクリックして下さい</p><!--7/29課題途中-->
+    <p v-if="show">※削除ボタンはコントロールキーを押しながらクリックして下さい</p><!--7/29課題途中-->
   </transition>
     <h2>新しい作業の追加</h2>
     <form class="add-form" v-on:submit.prevent="doAdd">
@@ -84,7 +84,7 @@ return {
       { value: 0, label: '作業中' },
       { value: 1, label: '完了' }
     ],
-    show: true
+    show: true,
   };
 },
 
@@ -167,12 +167,7 @@ return {
 *{
     border:solid 2px black
 }
-#action{
-    display: inline-block;
-}
 .fade-enter-active, .fade-leave-active {
-    display: inline-block;
-    transition: 3s;
     animation: hurueru .1s  3 , color-shift 2s;
 }
 @keyframes hurueru {
