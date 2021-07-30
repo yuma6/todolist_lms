@@ -31,7 +31,7 @@
             </td>
 
             <!-- <td class="button"> -->
-            <td class="button">
+            <td class="button" v-on:click.ctrl="doRemove(item)">
               <!-- <button v-on:click.ctrl="doRemove(item)"> -->
               <button v-on:click="show = !show" >
                 削除
