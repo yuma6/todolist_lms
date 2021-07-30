@@ -1,4 +1,6 @@
 <template>
+<!-- コントロールキーを押さない状態で削除ボタンをクリックしたときに「注意文が一時的に赤くなる + ちょっと震える」 
+ボタンクリック時に注意文に変化が発生するように、変化が自動で解除されるように、ctrlを押していれば変化しないようにする-->
   <div id = "todoapp">
     <label v-for="(label,key) in options" :key="key">
       <input type="radio"
@@ -27,15 +29,21 @@
                 {{ labels[item.state] }}
               </button>
             </td>
+
+            <!-- <td class="button"> -->
             <td class="button">
-              <button v-on:click.ctrl="doRemove(item)">
+              <!-- <button v-on:click.ctrl="doRemove(item)"> -->
+              <button v-on:click="show = !show">
                 削除
               </button>
             </td>
+
           </tr>
       </tbody>
     </table>
-  <p>※削除ボタンはコントロールキーを押しながらクリックして下さい</p>
+  <transition name="fade">
+    <p id="action" v-if="show">※削除ボタンはコントロールキーを押しながらクリックして下さい</p><!--7/29課題途中-->
+  </transition>
     <h2>新しい作業の追加</h2>
     <form class="add-form" v-on:submit.prevent="doAdd">
       コメント <input type="text" ref="comment">
@@ -75,7 +83,8 @@ return {
       { value: -1, label: 'すべて' },
       { value: 0, label: '作業中' },
       { value: 1, label: '完了' }
-    ]
+    ],
+    show: true
   };
 },
 
@@ -158,4 +167,25 @@ return {
 *{
     border:solid 2px black
 }
+#action{
+    display: inline-block;
+}
+.fade-enter-active, .fade-leave-active {
+    display: inline-block;
+    transition: 3s;
+    animation: hurueru .1s  3 , color-shift 2s;
+}
+@keyframes hurueru {
+    0% {transform: translate(0px, 0px) rotateZ(0deg)}
+    25% {transform: translate(2px, 2px) rotateZ(1deg)}
+    50% {transform: translate(0px, 2px) rotateZ(0deg)}
+    75% {transform: translate(2px, 0px) rotateZ(-1deg)}
+    100% {transform: translate(0px, 0px) rotateZ(0deg)}
+}
+@keyframes color-shift {
+    0% {color:red}
+    99% {color:red}
+    100% {color:black}
+}
+
 </style>
