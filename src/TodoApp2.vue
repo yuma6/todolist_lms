@@ -31,9 +31,9 @@
             </td>
 
             <!-- <td class="button"> -->
-            <td class="button" v-on:click.ctrl="doRemove(item)">
+            <td class="button">
               <!-- <button v-on:click.ctrl="doRemove(item)"> -->
-              <button v-on:click="show = !show" >
+              <button  v-on:click="show = !show, doRemove(item,$event)">
                 削除
               </button>
             </td>
@@ -42,7 +42,7 @@
       </tbody>
     </table>
   <transition name="fade">
-    <p v-if="show">※削除ボタンはコントロールキーを押しながらクリックして下さい</p><!--7/29課題途中-->
+    <p v-if="show">※削除ボタンはコントロールキーを押しながらクリックして下さい</p><!--??-->
   </transition>
     <h2>新しい作業の追加</h2>
     <form class="add-form" v-on:submit.prevent="doAdd">
@@ -84,7 +84,7 @@ return {
       { value: 0, label: '作業中' },
       { value: 1, label: '完了' }
     ],
-    show: true,
+    show: false
   };
 },
 
@@ -154,9 +154,14 @@ return {
     },
 
     // ★STEP10 削除の処理
-    doRemove: function (item) {
+    doRemove: function (item,e) {
       var index = this.todos.indexOf(item)
-      this.todos.splice(index, 1)
+      if(e.ctrlKey){//ctrlが押されている場合の処理
+        console.log(e)
+        this.todos.splice(index, 1)
+      }else{//ctrlが押されていない場合の処理
+        console.log(e)
+      }
     }
 
   }
