@@ -90,7 +90,7 @@ return {
       { value: 0, label: '作業中' },
       { value: 1, label: '完了' }
     ],
-    // show: true,不要
+    // show: true
     // view: false
   };
 },
@@ -161,18 +161,18 @@ return {
       item.state = !item.state ? 1 : 0
     },
 
-    // ★STEP10 削除の処理        //cssクラスを既に持っている場合に取り除く処理を書く
+    // ★STEP10 削除の処理
+//cssクラスを既に持っている場合に取り除く処理を書く
+//getHTMLid.classList.remove("className")
     doRemove: function (item,e) {
       let index = this.todos.indexOf(item)
       const getHTMLid = document.getElementById("pipipi")
-      
       if(e.ctrlKey){//ctrlが押されている場合の処理
-        console.log(e)
         this.todos.splice(index, 1)
+        console.log(e)
       }else{//ctrlが押されていない場合の処理
         //pタグを取得してcssクラスを与える
         getHTMLid.classList.add("className")
-        getHTMLid.classList.remove("className")
         console.log(e)
       }
     }
