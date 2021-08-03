@@ -167,6 +167,7 @@ return {
     doRemove: function (item,e) {
       let index = this.todos.indexOf(item)
       const getHTMLid = document.getElementById("pipipi")
+      getHTMLid.classList.remove("className")
       if(e.ctrlKey){//ctrlが押されている場合の処理
         this.todos.splice(index, 1)
         console.log(e)
