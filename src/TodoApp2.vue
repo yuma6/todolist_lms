@@ -33,7 +33,7 @@
             <!-- <td class="button"> -->
             <td class="button">
               <!-- <button v-on:click.ctrl="doRemove(item)"> -->
-              <button  v-on:click="show = !show, doRemove(item,$event)">
+              <button  v-on:click="show=!show,view=!view,doRemove(item,$event)">
                 削除
               </button>
             </td>
@@ -41,9 +41,15 @@
           </tr>
       </tbody>
     </table>
+  <!-- <transition name="fade">
+    <p v-show="show">※削除ボタンはコントロールキーを押しながらクリックして下さいa</p>
+  </transition>  
   <transition name="fade">
-    <p v-if="show">※削除ボタンはコントロールキーを押しながらクリックして下さい</p><!--??-->
-  </transition>
+    <p v-show="view" >※削除ボタンはコントロールキーを押しながらクリックして下さいb</p>
+  </transition> -->
+  <transition name="fade">
+    <p id="pipipi">※削除ボタンはコントロールキーを押しながらクリックして下さい</p><!--クラスを追加-->
+  </transition>  
     <h2>新しい作業の追加</h2>
     <form class="add-form" v-on:submit.prevent="doAdd">
       コメント <input type="text" ref="comment">
@@ -55,10 +61,10 @@
 <script>
 /* eslint no-unused-vars: 0 */
 // https://jp.vuejs.org/v2/examples/todomvc.html
-var STORAGE_KEY = 'todos-vuejs-demo'
-var todoStorage = {
+let STORAGE_KEY = 'todos-vuejs-demo'
+let todoStorage = {
   fetch: function () {
-    var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+    let todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
     todos.forEach(function (todo, index) {
       todo.id = index
     })
@@ -84,7 +90,8 @@ return {
       { value: 0, label: '作業中' },
       { value: 1, label: '完了' }
     ],
-    show: false
+    // show: true,不要
+    // view: false
   };
 },
 
@@ -117,7 +124,8 @@ return {
       },
       // deep オプションでネストしているデータも監視できる
       deep: true
-    }
+    },
+
   },
 
   // ★STEP9
@@ -131,7 +139,7 @@ return {
     // ★STEP7 ToDo 追加の処理
     doAdd: function(event, value) {
       // ref で名前を付けておいた要素を参照
-      var comment = this.$refs.comment
+      let comment = this.$refs.comment
       // 入力がなければ何もしないで return
       if (!comment.value.length) {
         return
@@ -153,13 +161,18 @@ return {
       item.state = !item.state ? 1 : 0
     },
 
-    // ★STEP10 削除の処理
+    // ★STEP10 削除の処理        //cssクラスを既に持っている場合に取り除く処理を書く
     doRemove: function (item,e) {
-      var index = this.todos.indexOf(item)
+      let index = this.todos.indexOf(item)
+      const getHTMLid = document.getElementById("pipipi")
+      
       if(e.ctrlKey){//ctrlが押されている場合の処理
         console.log(e)
         this.todos.splice(index, 1)
       }else{//ctrlが押されていない場合の処理
+        //pタグを取得してcssクラスを与える
+        getHTMLid.classList.add("className")
+        getHTMLid.classList.remove("className")
         console.log(e)
       }
     }
@@ -172,9 +185,12 @@ return {
 *{
     border:solid 2px black
 }
-.fade-enter-active, .fade-leave-active {
-    animation: hurueru .1s  3 , color-shift 2s;
+.className{
+    animation: hurueru .1s  3 , color-shift 2s
 }
+/* .fade-enter-active, .fade-leave-active { */
+.fade-enter-active .fade-leave-active {
+    animation: hurueru .1s  3 , color-shift 2s}
 @keyframes hurueru {
     0% {transform: translate(0px, 0px) rotateZ(0deg)}
     25% {transform: translate(2px, 2px) rotateZ(1deg)}
