@@ -166,24 +166,23 @@ return {
 //cssクラスを既に持っている場合に取り除く処理を書く
 //getHTMLid.classList.remove("className")
     doRemove: function (item,e) {
-
       let index = this.todos.indexOf(item)
       const getHTMLid = document.getElementById("pipipi")
-      const cAdd = getHTMLid.classList.add("className")
+      
 
       if(e.ctrlKey){//ctrlが押されている場合の処理
         this.todos.splice(index, 1)
-        console.log(e)
-      }else{//ctrlが押されていない場合の処理
+        //console.log(e)
+      }else{
+        //ctrlが押されていない場合の処理
         //pタグを取得してcssクラスを与える
-        cAdd
+        getHTMLid.classList.add("className")
         console.log(e)
       }
     },
   },
   mounted(){
     const getHTMLid = document.getElementById("pipipi")
-    const cRemove = getHTMLid.classList.remove("className")//cRemoveでは動かなかった
     getHTMLid.addEventListener("animationend",function() {
       getHTMLid.classList.remove("className")
       // console.log("aaa")
