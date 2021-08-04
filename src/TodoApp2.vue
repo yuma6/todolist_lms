@@ -33,7 +33,8 @@
             <!-- <td class="button"> -->
             <td class="button">
               <!-- <button v-on:click.ctrl="doRemove(item)"> -->
-              <button  v-on:click="show=!show,view=!view,doRemove(item,$event)">
+              <!-- <button  v-on:click="show=!show,view=!view,doRemove(item,$event)"> -->
+              <button v-on:click="doRemove(item,$event)">
                 削除
               </button>
             </td>
@@ -47,7 +48,7 @@
   <transition name="fade">
     <p v-show="view" >※削除ボタンはコントロールキーを押しながらクリックして下さいb</p>
   </transition> -->
-  <transition name="fade">
+  <transition>
     <p id="pipipi">※削除ボタンはコントロールキーを押しながらクリックして下さい</p><!--クラスを追加-->
   </transition>  
     <h2>新しい作業の追加</h2>
@@ -165,20 +166,29 @@ return {
 //cssクラスを既に持っている場合に取り除く処理を書く
 //getHTMLid.classList.remove("className")
     doRemove: function (item,e) {
+
       let index = this.todos.indexOf(item)
       const getHTMLid = document.getElementById("pipipi")
-      getHTMLid.classList.remove("className")
+      const cAdd = getHTMLid.classList.add("className")
+
       if(e.ctrlKey){//ctrlが押されている場合の処理
         this.todos.splice(index, 1)
         console.log(e)
       }else{//ctrlが押されていない場合の処理
         //pタグを取得してcssクラスを与える
-        getHTMLid.classList.add("className")
+        cAdd
         console.log(e)
       }
-    }
-
-  }
+    },
+  },
+  mounted(){
+    const getHTMLid = document.getElementById("pipipi")
+    const cRemove = getHTMLid.classList.remove("className")//cRemoveでは動かなかった
+    getHTMLid.addEventListener("animationend",function() {
+      getHTMLid.classList.remove("className")
+      // console.log("aaa")
+    })
+  },
 }
 </script>
 
@@ -187,22 +197,22 @@ return {
     border:solid 2px black
 }
 .className{
-    animation: hurueru .1s  3 , color-shift 2s
+    animation: hurueru .1s  3
 }
 /* .fade-enter-active, .fade-leave-active { */
-.fade-enter-active .fade-leave-active {
-    animation: hurueru .1s  3 , color-shift 2s}
+/* .fade-enter-active .fade-leave-active {
+    animation: hurueru .1s  3 , color-shift 2s} */
 @keyframes hurueru {
-    0% {transform: translate(0px, 0px) rotateZ(0deg)}
+    0% {transform: translate(0px, 0px) rotateZ(0deg);color:red}
     25% {transform: translate(2px, 2px) rotateZ(1deg)}
     50% {transform: translate(0px, 2px) rotateZ(0deg)}
     75% {transform: translate(2px, 0px) rotateZ(-1deg)}
-    100% {transform: translate(0px, 0px) rotateZ(0deg)}
+    100% {transform: translate(0px, 0px) rotateZ(0deg);color:red}
 }
-@keyframes color-shift {
+/* @keyframes color-shift {
     0% {color:red}
     99% {color:red}
     100% {color:black}
-}
+} */
 
 </style>
